@@ -1,0 +1,46 @@
+<html>
+
+<body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>     
+
+    // Attach a submit handler to the form 
+  // Attach a submit handler to the form 
+
+
+$('#uploadForm').submit(function(e) {
+	var formData = new FormData();
+    formData.append("uploadFiles", $('[name="file"]')[0].files[0]);
+    e.preventDefault();
+    $.ajax({
+        url: $(this).attr("action"),
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(formData).id,
+    dataType: 'application/json',
+        success: function( data, textStatus, jQxhr ){
+                    $('#response pre').html( JSON.stringify( data.id )  );
+                },
+                error: function( jqXhr, textStatus, errorThrown ){
+                    console.log( errorThrown );
+                }
+    });
+});
+
+    </script>
+<form id="uploadForm" action="https://api.videoindexer.ai/trial/Accounts/324517cb-f57f-4b61-a5b1-6c85051b92c0/Videos?name=324517cb-f57f-4b61-a5b1-6c85051b92c0&privacy=Private&indexingPreset=Default&streamingPreset=Default&sendSuccessEmail=False&accessToken=eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTI1NiIsInR5cCI6IkpXVCJ9.eyJBY2NvdW50SWQiOiIzMjQ1MTdjYi1mNTdmLTRiNjEtYTViMS02Yzg1MDUxYjkyYzAiLCJBbGxvd0VkaXQiOiJUcnVlIiwiRXh0ZXJuYWxVc2VySWQiOiI4RTc2RkQxNkVEQjA0N0Y3QkE4QjhCREExOTUzODJFMSIsIlVzZXJUeXBlIjoiTWljcm9zb2Z0Q29ycEFhZCIsIklzc3VlckxvY2F0aW9uIjoiVHJpYWwiLCJuYmYiOjE2MDgxOTQwODIsImV4cCI6MTYwODE5Nzk4MiwiaXNzIjoiaHR0cHM6Ly9hcGkudmlkZW9pbmRleGVyLmFpLyIsImF1ZCI6Imh0dHBzOi8vYXBpLnZpZGVvaW5kZXhlci5haS8ifQ.XpFfsJC5oxHRrX-wC0DCZEjUSjZmbXnR6SYrKax_0Zg" method="post" enctype="multipart/form-data" accept-charset="ISO-8859-1">   
+
+      <div class="inputFileCustom">
+        <input type="file" size="45" name="file" id="uploadFiles" accept="application/pdf"/>
+        <label for="uploadFiles">
+            <div class="ic-bt ic-bt-details ic-bt-text btn btn-border">
+            Choose a file
+            </div>
+        </label>
+    </div>
+
+    <input type="submit" value="Upload PDF" class="btn btn-primary" />
+</form>
+    
+</body>
+</html>
